@@ -4,3 +4,4 @@ resource "google_secret_manager_secret" "gcp-secret" {
   labels = {
     label = "SSL certificate"
   }
+}
