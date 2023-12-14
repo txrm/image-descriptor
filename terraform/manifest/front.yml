@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: descriptor-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: descriptor-frontend
+  template:
+    metadata:
+      labels:
+        app: descriptor-frontend
+    spec:
+      containers:
+      - name: descriptor-frontend
+        image: rafaelmanzanom/descriptor-frontend:v1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-service
+spec:
+  selector:
+    app: descriptor-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: descriptor-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: "placeholder_descriptor.com"     # Your domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: front-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - "placeholder_descriptor.com"
+    secretName: SSL-secret
