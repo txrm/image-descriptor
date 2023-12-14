@@ -7,7 +7,7 @@ resource "google_container_cluster" "gateway-cluster" {
 resource "google_container_node_pool" "pool" {
   name = "pool"
   cluster = "${google_container_cluster.gateway-cluster.name}"
-  zone = "europe-west1-b"
+  location = "europe-west1"
   node_count = "1"
   node_config {
     machine_type = "g1-small"
