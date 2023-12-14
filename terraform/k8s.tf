@@ -1,6 +1,7 @@
 resource "google_container_cluster" "gateway-cluster" {
   name = "gateway-cluster"
   location = "europe-west1-b"
+  subnetwork = google_compute_subnetwork.descriptor_vpc_sub.id
   initial_node_count = 1
 }
 
