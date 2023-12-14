@@ -1,6 +1,6 @@
 resource "google_container_cluster" "gateway-cluster" {
-  name               = "gateway-cluster"
-  zone               = "europe-west1-b"
+  name = "gateway-cluster"
+  location = "europe-west1-b"
   initial_node_count = 1
 }
 
