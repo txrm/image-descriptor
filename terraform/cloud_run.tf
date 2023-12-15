@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_service" "model_cloudrun" {
   name = "model-downloader"
-  location = "europe-west1-b"
+  location = "europe-west1"
 
   template {
     service_account = google_service_account.descriptor_function_account.email
@@ -22,7 +22,7 @@ resource "google_cloud_run_v2_service" "model_cloudrun" {
 
 resource "google_cloud_run_v2_service" "worker_cloudrun" {
   name = "descriptor-worker"
-  location = "europe-west1-b"
+  location = "europe-west1"
 
   template {
     service_account = google_service_account.descriptor_function_account.email

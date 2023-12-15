@@ -2,16 +2,18 @@ resource "google_secret_manager_secret" "gcp-secret" {
   secret_id = "SSL-secret"
 
   labels = {
-    label = "SSL certificate"
+    label = "ssl-certificate"
   }
   replication {
     user_managed {
       replicas {
-        location = "europe-south1"
+        location = "europe-southwest1"
       }
       replicas {
         location = "us-east1"
       }
     }
   }
+
+  depends_on = [google_project_service.secret_manager]
 }
